@@ -7,6 +7,7 @@ import com.example.hm_interview.dto.TransactionDTO;
 import com.example.hm_interview.model.Transaction;
 import com.example.hm_interview.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -73,8 +74,8 @@ public class TransactionController implements TransactionsApi {
     @GetMapping("/filter")
     public List<TransactionDTO> filterTransactions(@RequestParam(required = false) String type,
                                                 @RequestParam(required = false) String actor,
-                                                @RequestParam(required = false) LocalDateTime from,
-                                                @RequestParam(required = false) LocalDateTime to,
+                                                @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime from,
+                                                @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime to,
                                                 @RequestParam(required = false) String key,
                                                 @RequestParam(required = false) String value) {
         List<Transaction> transactions = transactionService.getTransactionsByFilter(type, actor, from, to, key, value);
